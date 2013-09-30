@@ -1,6 +1,11 @@
 ﻿Module Module1
 
     Sub Main()
+        BinarioADecimal()
+
+    End Sub
+
+    Sub BinarioADecimal()
         Dim reply As String = ""
         Dim bits As Integer = 0
         Dim cifra As Integer = 0
@@ -8,7 +13,7 @@
         reply = Console.ReadLine()
         Try
             cifra = reply
-            Catch ex As Exception
+        Catch ex As Exception
             Console.WriteLine(ex.Message)
             Main()
 
@@ -23,23 +28,30 @@
         Next
 
         bits = reply.Length
-        Console.WriteLine(cifra & " es de " & bits & " bits." & vbNewLine & "Pronto podré convertir a decimal.")
-        Environment.Exit(0)
+        Select Case bits
+            Case Is > 1
+                Console.WriteLine(cifra & " es de " & bits & " bits.")
+            Case Is < 2
+                Console.WriteLine(cifra & " es de " & bits & " bit.")
+        End Select
 
         'Comienza la conversión
-        Dim digitcounter As Integer = 0
-        Dim resultado As String = ""
+        Dim digitcounter As Integer = bits
+        Dim resultado As Integer = 0
+        Dim digitinteger As Integer = 0
+
         For Each digit In cifra.ToString
-            digitcounter += 1
-            Select Case digitcounter
-                Case Is = 1
-                    resultado += 1
-                Case Is = 2
-                    resultado += 
-            End Select
+
+            digitinteger = digit.ToString
+            Dim valor As Integer = 0
+            valor += 2 ^ (digitcounter - 1)
+            resultado += digitinteger * valor
+            digitcounter -= 1
+
         Next
 
-        Main()
+        Console.WriteLine("Este número en decimal es: " & resultado & ".")
+        BinarioADecimal()
 
     End Sub
 

@@ -1,9 +1,25 @@
 ﻿Module Module1
 
     Sub Main()
-        Console.Title = "Calculadora binario de Jesús Garcés"
-        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 31 cifras." & vbNewLine)
-        BinarioADecimal()
+        Console.Title = "Calculadora binario/decimal de Jesús Garcés"
+
+        Console.WriteLine("¿Qué desea convertir? Binario | Decimal")
+        Dim reply = Console.ReadLine
+        Select Case reply
+            Case Is = "Binario"
+                Console.ForegroundColor = ConsoleColor.Cyan
+                Console.WriteLine("Introduzca un número en binario para convertirlo en decimal.")
+                Console.ForegroundColor = ConsoleColor.Green
+                Console.WriteLine("· No necesita introducir ceros a la izquierda." & vbNewLine & "· Espacios no son admitidos." & vbNewLine & "· Hay un límite técnico de 31 cifras." & vbNewLine & "· Escriba Salir para terminar.")
+                Console.ForegroundColor = ConsoleColor.Gray
+                BinarioADecimal()
+            Case Is = "Decimal"
+                DecimalABinario()
+            Case Is = "Salir"
+                Environment.Exit(0)
+
+
+        End Select
 
     End Sub
 
@@ -12,6 +28,11 @@
         Dim bits As Integer
 
         reply = Console.ReadLine()
+
+        If reply.Equals("Salir") Then
+            Main()
+
+        End If
 
         ' Realizar comprobaciones por las que podría fallar para evitar usar try
         Dim sonnumeros As Boolean = False
@@ -37,11 +58,11 @@
             Console.WriteLine("Este programa tiene un límite técnico de 31 cifras por número.")
             BinarioADecimal()
         End If
-        
+
         ' Se han superado todas las comprobaciones
 
         bits = reply.Length
-        
+
 
         'Comienza la conversión
         Dim digitcounter As Integer = bits
@@ -61,11 +82,22 @@
             resultado += digitinteger * valor
             digitcounter -= 1
 
+
         Next
 
         Console.WriteLine(reply & " en decimal es: " & resultado & ".")
 
         BinarioADecimal()
+
+    End Sub
+
+    Sub DecimalABinario()
+        Console.WriteLine("Esta función no está aún disponible")
+        Main()
+
+        Dim reply As String = Console.ReadLine
+
+
 
     End Sub
 

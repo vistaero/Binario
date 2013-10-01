@@ -2,7 +2,7 @@
 
     Sub Main()
         Console.Title = "Calculadora binario de Jesús Garcés"
-        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 10 cifras." & vbNewLine)
+        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 19 cifras." & vbNewLine)
         BinarioADecimal()
 
     End Sub
@@ -10,8 +10,7 @@
     Sub BinarioADecimal()
         Dim reply As String = ""
         Dim bits As Integer = 0
-        Dim cifra As Integer = 0
-        Dim salir As Boolean = False
+        Dim cifra As Long = 0
         reply = Console.ReadLine()
         Try
             cifra = reply
@@ -39,7 +38,7 @@
 
         'Comienza la conversión
         Dim digitcounter As Integer = bits
-        Dim resultado As Integer = 0
+        Dim resultado As Long = 0
         Dim digitinteger As Integer = 0
 
         For Each digit In cifra.ToString

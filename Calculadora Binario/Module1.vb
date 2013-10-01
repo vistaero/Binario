@@ -1,6 +1,8 @@
 ﻿Module Module1
 
     Sub Main()
+        Console.Title = "Calculadora binario de Jesús Garcés"
+        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 10 cifras." & vbNewLine)
         BinarioADecimal()
 
     End Sub
@@ -14,15 +16,15 @@
         Try
             cifra = reply
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
-            Main()
+            Console.WriteLine("Respuesta no válida, revise su número e inténtelo de nuevo: " & ex.Message)
+            BinarioADecimal()
 
         End Try
 
         For Each digit In cifra.ToString
             If digit.ToString > 1 Then
                 Console.WriteLine("No es un número binario")
-                Main()
+                BinarioADecimal()
 
             End If
         Next

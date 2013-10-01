@@ -10,7 +10,7 @@
     Sub BinarioADecimal()
         Dim reply As String
         Dim bits As Integer
-        Dim cifra As Long
+
         reply = Console.ReadLine()
 
         ' Realizar comprobaciones por las que podría fallar para evitar usar try

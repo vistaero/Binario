@@ -2,22 +2,22 @@
 
     Sub Main()
         Console.Title = "Calculadora binario de Jesús Garcés"
-        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 19 cifras." & vbNewLine)
+        Console.WriteLine("Introduzca un número en binario para convertirlo en decimal." & vbNewLine & "No necesita introducir ceros a la izquierda." & vbNewLine & "Espacios no son admitidos." & vbNewLine & "Hay un límite técnico de 31 cifras." & vbNewLine)
         BinarioADecimal()
 
     End Sub
 
     Sub BinarioADecimal()
-        Dim reply As String = ""
-        Dim bits As Integer = 0
-        Dim cifra As Long = 0
+        Dim reply As String
+        Dim bits As Integer
+        Dim cifra As Long
         reply = Console.ReadLine()
 
         ' Realizar comprobaciones por las que podría fallar para evitar usar try
         Dim sonnumeros As Boolean = False
         Dim numerosmayoresqueuno As Boolean = False
         ' Primero comprobamos si la respuesta es demasiado larga
-        If reply.LongCount < 20 Then
+        If reply.LongCount < 31 Then
             For Each digit As Char In reply
                 ' Comprobar si todos los caracteres de la respuesta son números
                 sonnumeros = Char.IsDigit(digit)
@@ -34,19 +34,14 @@
                 BinarioADecimal()
             End If
         Else
-            Console.WriteLine("Este programa tiene un límite técnico de 19 cifras por número.")
+            Console.WriteLine("Este programa tiene un límite técnico de 31 cifras por número.")
             BinarioADecimal()
         End If
         
         ' Se han superado todas las comprobaciones
 
         bits = reply.Length
-        Select Case bits
-            Case Is > 1
-                Console.WriteLine(reply & " es de " & bits & " bits.")
-            Case Is < 2
-                Console.WriteLine(reply & " es de " & bits & " bit.")
-        End Select
+        
 
         'Comienza la conversión
         Dim digitcounter As Integer = bits
@@ -68,7 +63,8 @@
 
         Next
 
-        Console.WriteLine("Este número en decimal es: " & resultado & ".")
+        Console.WriteLine(reply & " en decimal es: " & resultado & ".")
+
         BinarioADecimal()
 
     End Sub

@@ -18,7 +18,6 @@
             Case Is = "Salir"
                 Environment.Exit(0)
 
-
         End Select
 
     End Sub
@@ -69,12 +68,12 @@
         Dim resultado As Long = 0
         Dim digitinteger As Integer = 0
 
-        For Each digit In reply
+        ' Mi fascinante motor de conversión que me llevó toda la santa tarde.
+        ' Y yo suspendía matemáticas...
+        ' Mi ego va a estar por las nubes durante lustros por "inventar" esta ecuación.
+        ' Sin buscar en Google ni preguntar a nadie, ¡¿quién es el hombre?!
 
-            ' Mi fascinante motor de conversión que me llevó toda la santa tarde.
-            ' Y yo suspendía matemáticas...
-            ' Mi ego va a estar por las nubes durante lustros por "inventar" esta ecuación.
-            ' Sin buscar en Google ni preguntar a nadie, ¡¿quién es el hombre?!
+        For Each digit In reply
 
             digitinteger = digit.ToString
             Dim valor As Integer = 0
@@ -82,21 +81,29 @@
             resultado += digitinteger * valor
             digitcounter -= 1
 
-
         Next
 
         Console.WriteLine(reply & " en decimal es: " & resultado & ".")
-
         BinarioADecimal()
 
     End Sub
 
     Sub DecimalABinario()
         Console.WriteLine("Esta función no está aún disponible")
-        Main()
+        'Main()
 
         Dim reply As String = Console.ReadLine
+        Dim valor As Integer = 1
+        Dim contador As Integer
+        Dim resultado As Integer
+        Do Until reply.Equals(0)
+            valor *= 2
+            If valor < reply Then
+                resultado = reply - valor
+                Console.WriteLine(resultado)
+            End If
 
+        Loop
 
 
     End Sub

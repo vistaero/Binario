@@ -1,16 +1,5 @@
 ﻿Module Module1
 
-    Public Function CadenaSinCeros(ByVal sEntrada As String) As String
-        Dim i As Integer, j As Integer, sIntermedio As String
-        For j = 1 To Len(sEntrada)
-            If Mid(sEntrada, j, 1) <> "0" Then
-                sIntermedio = Mid(sEntrada, j)
-                Exit For
-            End If
-        Next
-        CadenaSinCeros = sIntermedio
-    End Function
-
     Sub Main()
         Console.Title = "Calculadora binario/decimal de Jesús Garcés"
 
@@ -71,10 +60,7 @@
         End If
 
         ' Se han superado todas las comprobaciones
-
         bits = reply.Length
-
-
         'Comienza la conversión
         Dim digitcounter As Integer = bits
         Dim resultado As Long = 0
@@ -104,6 +90,10 @@
         Console.WriteLine("Introduzca un número decimal (en desarrollo)")
 
         Dim reply As String = Console.ReadLine
+        If reply.Equals("Salir") Then
+            Main()
+        End If
+
         Dim dividendo As Integer = reply
         Dim cociente As Integer = 2
         Dim resto As Integer
@@ -115,21 +105,18 @@
             ' Anotamos el resto
             resto = dividendo Mod 2
             ' Comprobamos si el cociente es 1
+            resultado = resto & resultado
             Select Case cociente
                 Case Is < 2
                     resultado = cociente & resultado
             End Select
-
-            resultado = resto & resultado
             Console.WriteLine("Se ha dividido " & dividendo & " entre 2 con un resultado de " & cociente & " y un resto de " & resto)
             ' Hacemos que el nuevo número que hay que dividir entre 2 sea el resultado de la división
             dividendo = cociente
-
         Loop
 
         Console.WriteLine("Este número en binario es " & resultado)
-        Main()
-
+        DecimalABinario()
 
     End Sub
 

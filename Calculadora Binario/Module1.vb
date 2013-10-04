@@ -91,28 +91,19 @@
 
     Sub DecimalABinario()
         Console.WriteLine("Introduzca un número decimal (en desarrollo)")
-        'Main()
-
-        Dim dividendo As String = Console.ReadLine
-
+        Dim reply As String = Console.ReadLine
+        Dim dividendo As String
+        dividendo = reply
         Dim cociente As Integer
         Dim resto As Integer
         Dim resultado As String
 
-        Do Until cociente < 2
-            cociente = dividendo / 2
-            resto = dividendo Mod 2
-            dividendo = cociente
-        Loop
-        
+        cociente = dividendo \ 2
+        resto = dividendo Mod 2
+        dividendo = cociente
 
-
-
-        Console.WriteLine("Se ha dividido " & dividendo & " entre 2 con un resultado de " & cociente & " y un resto de " & resto)
-
-        Console.ReadLine()
-        Main()
-
+        Console.WriteLine("Se ha dividido " & reply & " entre 2 con un resultado de " & cociente & " y un resto de " & resto)
+        DecimalABinario()
 
     End Sub
 

@@ -19,6 +19,7 @@
                 Environment.Exit(0)
 
         End Select
+        Main()
 
     End Sub
 
@@ -89,21 +90,28 @@
     End Sub
 
     Sub DecimalABinario()
-        Console.WriteLine("Esta función no está aún disponible")
+        Console.WriteLine("Introduzca un número decimal (en desarrollo)")
         'Main()
 
-        Dim reply As String = Console.ReadLine
-        Dim valor As Integer = 1
-        Dim contador As Integer
-        Dim resultado As Integer
-        Do Until reply.Equals(0)
-            valor *= 2
-            If valor < reply Then
-                resultado = reply - valor
-                Console.WriteLine(resultado)
-            End If
+        Dim dividendo As String = Console.ReadLine
 
+        Dim cociente As Integer
+        Dim resto As Integer
+        Dim resultado As String
+
+        Do Until cociente < 2
+            cociente = dividendo / 2
+            resto = dividendo Mod 2
+            dividendo = cociente
         Loop
+        
+
+
+
+        Console.WriteLine("Se ha dividido " & dividendo & " entre 2 con un resultado de " & cociente & " y un resto de " & resto)
+
+        Console.ReadLine()
+        Main()
 
 
     End Sub

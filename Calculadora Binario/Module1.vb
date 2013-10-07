@@ -2,13 +2,13 @@
 
 
     Private ComentariosActivados As Boolean = False
-
+    Private reply As String
 
     Sub Main()
         Console.Title = "Calculadora binario/decimal de Jesús Garcés"
 
         Console.WriteLine("¿Qué desea convertir? Binario | Decimal. O bien, escriba Ayuda.")
-        Dim reply = Console.ReadLine
+        reply = Console.ReadLine
         Select Case reply
             Case Is = "Binario"
                 Console.ForegroundColor = ConsoleColor.Cyan
@@ -26,32 +26,46 @@
                 DecimalABinario()
             Case Is = "Salir"
                 Environment.Exit(0)
-            Case Is = "Activar comentarios"
-                ComentariosActivados = True
-                Console.WriteLine("Comentarios activados")
-            Case Is = "Desactivar comentarios"
-                ComentariosActivados = False
-                Console.WriteLine("Comentarios desactivados")
-                
+            
+
         End Select
-        If reply.Equals("Ayuda") Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.WriteLine("Comandos")
-            Console.ForegroundColor = ConsoleColor.Green
-            Console.WriteLine("· Binario: Convertir un número desde binario a decimal." & vbNewLine & "· Decimal: Convertir un número desde decimal a binario." & vbNewLine & "· Activar comentarios: El programa explica cada paso que realiza durante las conversiones." & vbNewLine & "· Desactivar comentarios: El programa no explica cada paso que realiza durante las conversiones." & vbNewLine & "· Salir: Volver al inicio del programa. Si ya está en el inicio, se cierra.")
-            Console.ForegroundColor = ConsoleColor.Gray
-        End If
+
         Main()
 
     End Sub
 
+    Sub Comandos()
+
+        Select Case reply
+            Case Is = "Activar comentarios"
+                ComentariosActivados = True
+                Console.WriteLine("Comentarios activados")
+                reply = ""
+                Return
+            Case Is = "Desactivar comentarios"
+                ComentariosActivados = False
+                Console.WriteLine("Comentarios desactivados")
+                reply = ""
+                Return
+            Case Is = "Ayuda"
+                Console.ForegroundColor = ConsoleColor.Cyan
+                Console.WriteLine("Comandos")
+                Console.ForegroundColor = ConsoleColor.Green
+                Console.WriteLine("Binario: Convertir un número desde binario a decimal." & vbNewLine & "Decimal: Convertir un número desde decimal a binario." & vbNewLine & "Activar comentarios: Cada paso realizado durante las conversiones es explicado." & vbNewLine & "Desactivar comentarios: Desactiva los comentarios." & vbNewLine & "Salir: Volver al inicio del programa. Si ya está en el inicio, se cierra.")
+                Console.ForegroundColor = ConsoleColor.Gray
+                reply = ""
+                Return
+        End Select
+
+
+    End Sub
+
     Sub BinarioADecimal()
-        Dim reply As String
-        Dim bits As Integer
-
         reply = Console.ReadLine()
-
-        If reply.Equals("Salir") Then
+        Comandos()
+        If reply.Equals("") Then
+            BinarioADecimal()
+        ElseIf reply.Equals("Salir") Then
             Main()
         End If
 
@@ -79,14 +93,10 @@
             Console.WriteLine("Este programa tiene un límite técnico de 31 cifras por número.")
             BinarioADecimal()
         End If
-
-        ' Se han superado todas las comprobaciones
-        bits = reply.Length
-        'Comienza la conversión
-        Dim digitcounter As Integer = bits
+        
+        ' Se han superado todas las comprobaciones. Comienza la conversión
+        Dim bits = reply.Length, digitcounter = bits, digitinteger As Integer = 0
         Dim resultado As Long = 0
-        Dim digitinteger As Integer = 0
-
         ' Motor de conversión manual
         For Each digit In reply
             digitinteger = digit.ToString
@@ -103,7 +113,10 @@
 
     Sub DecimalABinario()
         Dim reply As String = Console.ReadLine
-        If reply.Equals("Salir") Then
+        Comandos()
+        If reply.Equals("") Then
+            DecimalABinario()
+        ElseIf reply.Equals("Salir") Then
             Main()
         End If
 

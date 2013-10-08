@@ -1,53 +1,48 @@
 ﻿Module Module1
 
-
     Private ComentariosActivados As Boolean = False
     Private reply As String
 
     Sub Main()
         Console.Title = "Calculadora binario/decimal de Jesús Garcés"
-
         Console.WriteLine("¿Qué desea convertir? Binario | Decimal. O bien, escriba Ayuda.")
         reply = Console.ReadLine
         Select Case reply
-            Case Is = "Binario"
+            Case Is = "Binario", "binario"
                 Console.ForegroundColor = ConsoleColor.Cyan
                 Console.WriteLine("Introduzca un número en binario para convertirlo en decimal.")
                 Console.ForegroundColor = ConsoleColor.Green
                 Console.WriteLine("· No necesita introducir ceros a la izquierda." & vbNewLine & "· Espacios no son admitidos." & vbNewLine & "· Hay un límite técnico de 31 cifras." & vbNewLine & "· Escriba Salir para terminar.")
                 Console.ForegroundColor = ConsoleColor.Gray
                 BinarioADecimal()
-            Case Is = "Decimal"
+            Case Is = "Decimal", "decimal"
                 Console.ForegroundColor = ConsoleColor.Cyan
                 Console.WriteLine("Introduzca un número en decimal.")
                 Console.ForegroundColor = ConsoleColor.Green
                 Console.WriteLine("· No puede introducir letras ni signos de puntuación." & vbNewLine & "· Espacios no son admitidos." & vbNewLine & "· Hay un límite técnico de 18 cifras." & vbNewLine & "· Escriba Salir para terminar.")
                 Console.ForegroundColor = ConsoleColor.Gray
                 DecimalABinario()
-            Case Is = "Salir"
+            Case Is = "Salir", "salir"
                 Environment.Exit(0)
-            
-
         End Select
-
+        Comandos()
         Main()
 
     End Sub
 
     Sub Comandos()
-
         Select Case reply
-            Case Is = "Activar comentarios"
+            Case Is = "Activar comentarios", "activar comentarios"
                 ComentariosActivados = True
                 Console.WriteLine("Comentarios activados")
                 reply = ""
                 Return
-            Case Is = "Desactivar comentarios"
+            Case Is = "Desactivar comentarios", "desactivar comentarios"
                 ComentariosActivados = False
                 Console.WriteLine("Comentarios desactivados")
                 reply = ""
                 Return
-            Case Is = "Ayuda"
+            Case Is = "Ayuda", "ayuda"
                 Console.ForegroundColor = ConsoleColor.Cyan
                 Console.WriteLine("Comandos")
                 Console.ForegroundColor = ConsoleColor.Green
@@ -57,7 +52,6 @@
                 Return
         End Select
 
-
     End Sub
 
     Sub BinarioADecimal()
@@ -65,7 +59,7 @@
         Comandos()
         If reply.Equals("") Then
             BinarioADecimal()
-        ElseIf reply.Equals("Salir") Then
+        ElseIf reply.Equals("Salir", StringComparison.CurrentCultureIgnoreCase) Then
             Main()
         End If
 
@@ -116,7 +110,7 @@
         Comandos()
         If reply.Equals("") Then
             DecimalABinario()
-        ElseIf reply.Equals("Salir") Then
+        ElseIf reply.Equals("Salir", StringComparison.CurrentCultureIgnoreCase) Then
             Main()
         End If
 

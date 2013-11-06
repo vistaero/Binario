@@ -22,6 +22,8 @@
                 Console.WriteLine("· No puede introducir letras ni signos de puntuación." & vbNewLine & "· Espacios no son admitidos." & vbNewLine & "· Hay un límite técnico de 18 cifras." & vbNewLine & "· Escriba Salir para terminar.")
                 Console.ForegroundColor = ConsoleColor.Gray
                 DecimalABinario()
+            Case Is = "Hexadecimal"
+                DecimalAHexadecimal()
             Case Is = "Salir", "salir"
                 Environment.Exit(0)
         End Select
@@ -54,6 +56,61 @@
 
     End Sub
 
+    Sub DecimalAHexadecimal()
+        Dim reply As String = Console.ReadLine
+        Comandos()
+        If reply.Equals("") Then
+            DecimalAHexadecimal()
+        ElseIf reply.Equals("Salir", StringComparison.CurrentCultureIgnoreCase) Then
+            Main()
+        End If
+
+        ' Realizar comprobaciones por las que podría fallar para evitar usar try
+        Dim sonnumeros As Boolean = False
+        ' Primero comprobamos si la respuesta es demasiado larga
+        If reply.LongCount < 19 Then
+            For Each digit As Char In reply
+                ' Comprobar si todos los caracteres de la respuesta son números
+                sonnumeros = Char.IsDigit(digit)
+                ' Comprobar que ningún número sea mayor que 1
+            Next
+            ' Comprobamos si se cumple alguna de las condiciones no permitidas
+            If sonnumeros.Equals(False) Then
+                Console.WriteLine("Sólo se admiten números")
+                DecimalAHexadecimal()
+            End If
+        Else
+            Console.WriteLine("Este programa tiene un límite técnico de 18 cifras por número.")
+            DecimalAHexadecimal()
+        End If
+        ' Se han superado todas las comprobaciones
+        
+        Console.WriteLine(reply)
+        Dim cociente As Long = reply \ 16
+        Console.WriteLine(cociente)
+        Dim resto As String = reply Mod 16
+        Console.WriteLine(resto)
+        Select Case resto
+            Case Is = 10
+                resto = "A"
+            Case Is = 11
+                resto = "B"
+            Case Is = 12
+                resto = "C"
+            Case Is = 13
+                resto = "D"
+                Console.WriteLine("se ha cambiado")
+            Case Is = 14
+                resto = "E"
+            Case Is = 15
+                resto = "F"
+            Case Is > 15
+                Console.WriteLine("Has hecho algo mal, inútil.")
+        End Select
+        Dim resultado As String = cociente & resto
+
+    End Sub
+
     Sub BinarioADecimal()
         reply = Console.ReadLine()
         Comandos()
@@ -62,23 +119,32 @@
         ElseIf reply.Equals("Salir", StringComparison.CurrentCultureIgnoreCase) Then
             Main()
         End If
-
-        ' Realizar comprobaciones por las que podría fallar para evitar usar try
+        If ComentariosActivados = True Then
+            Console.WriteLine("Realizar comprobaciones por las que podría fallar la conversión")
+        End If
         Dim sonnumeros As Boolean = False
         Dim numerosmayoresqueuno As Boolean = False
-        ' Primero comprobamos si la respuesta es demasiado larga
+        If ComentariosActivados = True Then
+            Console.WriteLine("Comprobar si la respuesta es demasiado larga")
+        End If
         If reply.LongCount < 31 Then
+            If ComentariosActivados = True Then
+                Console.WriteLine("Comprobar que ninguna cifra sea mayor que 1 o no sea un número")
+            End If
             For Each digit As Char In reply
-                ' Comprobar si todos los caracteres de la respuesta son números
                 sonnumeros = Char.IsDigit(digit)
-                ' Comprobar que ningún número sea mayor que 1
                 If sonnumeros = True Then
                     If digit.ToString > 1 Then
+                        If ComentariosActivados = True Then
+                            Console.WriteLine("Se ha encontrado un número mayor que uno.")
+                        End If
                         numerosmayoresqueuno = True
                     End If
                 End If
             Next
-            ' Comprobamos si se cumple alguna de las condiciones no permitidas
+            If ComentariosActivados = True Then
+                Console.WriteLine("Comprobamos si se cumple alguna de las condiciones no permitidas")
+            End If
             If sonnumeros.Equals(False) OrElse numerosmayoresqueuno = True Then
                 Console.WriteLine("Un número binario sólo puede tener 0 y/o 1.")
                 BinarioADecimal()
@@ -87,8 +153,10 @@
             Console.WriteLine("Este programa tiene un límite técnico de 31 cifras por número.")
             BinarioADecimal()
         End If
-        
-        ' Se han superado todas las comprobaciones. Comienza la conversión
+        If ComentariosActivados = True Then
+            Console.WriteLine("Se han superado todas las comprobaciones. Comienza la conversión")
+        End If
+
         Dim bits = reply.Length, digitcounter = bits, digitinteger As Integer = 0
         Dim resultado As Long = 0
         ' Motor de conversión manual
